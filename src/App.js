@@ -19,7 +19,7 @@ function App() {
   const [decimal, setDecimal] = useState(false);
 
   const handleClick = (e) => {
-    if (e.target.value !== "AC" && e.target.value !== "b"){
+    if (e.target.value !== "AC" && e.target.value !== "b") {
       setInput(e.target.value);
     }
 
@@ -28,9 +28,10 @@ function App() {
       setTempAnswer("");
       setAnswer("");
       setDecimal(false);
+      setInput("");
       return;
     } else if (e.target.value === "b") {
-      if (equation[equation.length-1] === ".") {
+      if (equation[equation.length - 1] === ".") {
         setDecimal(false);
       }
       equation.splice(-1);
@@ -42,6 +43,12 @@ function App() {
     ) {
       equation.splice(-1);
     } else if (e.target.value === "=") {
+      if (operations.includes(equation[equation.length-1])) {
+        equation.splice(-1);
+      }
+      if (operations.includes(equation[0]) && equation[0] !== "-") {
+        equation.shift();
+      }
       setTempAnswer(evaluate(equation.join("")));
       setEquation([answer]);
     } else if (operations.includes(e.target.value) && answer !== "") {
@@ -57,7 +64,9 @@ function App() {
       setDecimal(false);
     }
 
-    if (decimal && e.target.value === ".") { return }
+    if (decimal && e.target.value === ".") {
+      return;
+    }
     setEquation((equation) => [...equation, e.target.value]);
   };
 
@@ -73,9 +82,11 @@ function App() {
   // console.log("answer", answer);
 
   return (
-    <div className="grid grid-row-2 justify-center content-center h-screen">
-      <Display input={input} equation={equation.join("")} />
-      <Buttons handleClick={handleClick} />
+    <div className="grid grid-row-2 justify-center content-center h-screen v-screen bg-gray-100">
+      <div className="shadow-2xl">
+        <Display input={input} equation={equation.join("")} />
+        <Buttons handleClick={handleClick} />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 const Buttons = ({ handleClick, handleEquate }) => {
   return (
-    <div className="grid grid-cols-4 justify-items-center items-center max-w-md bg-gray-300 font-sans text-xl">
+    <div className="grid grid-cols-4 justify-items-center items-center max-w-md bg-gray-100 font-sans text-xl">
       <button value={"AC"} onClick={handleClick} id="clear" className="font-bold text-gray-500 bg-gray-100 w-48 h-24 col-start-1 col-end-3">AC</button>
       <button value={"b"} onClick={handleClick} id="backspace" className="font-bold text-gray-500 bg-gray-100 w-24 h-24 flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
